@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from data import DatasetFromHdf5
 from model.rpmnet import Net
 
-parser = argparse.ArgumentParser(description="SR model")
+parser = argparse.ArgumentParser(description="RPMNet")
 parser.add_argument("--batchSize", type=int, default=64, help="training batch size")
 parser.add_argument("--nEpochs", type=int, default=200, help="number of epochs to train for")
 parser.add_argument("--lr", type=float, default=0.0001, help="Learning Rate. Default=1e-4")

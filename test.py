@@ -8,7 +8,7 @@ from os import listdir
 from os.path import join
 from skimage.measure import compare_ssim
 
-parser = argparse.ArgumentParser(description="SR test")
+parser = argparse.ArgumentParser(description="RPMNet")
 parser.add_argument("--cuda", action="store_true", help="use cuda?")
 parser.add_argument("--model", default="train/ESPCN/100.pth", type=str, help="model path")
 parser.add_argument("--imagepath", default="/disk/test_dataset/urban100_x4/", type=str, help="image path")
