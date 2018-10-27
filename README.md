@@ -62,5 +62,3 @@ optional arguments:
   --scale SCALE
 ```
 
-### Pretrained
-https://www.dropbox.com/s/ax5sbrj3loaboab/RPMNet_100.pth?dl=0

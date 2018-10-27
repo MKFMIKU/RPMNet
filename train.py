@@ -20,7 +20,7 @@ parser.add_argument("--threads", type=int, default=1, help="Number of threads fo
 parser.add_argument("--momentum", default=0.9, type=float, help="Momentum, Default: 0.9")
 parser.add_argument("--weight-decay", "--wd", default=1e-4, type=float, help="weight decay, Default: 1e-4")
 parser.add_argument("--pretrained", default="", type=str, help="path to pretrained model (default: none)")
-parser.add_argument("--dataset", default="/path/to/dataset.h5", type=str, help="path to load dataset")
+parser.add_argument("--dataset", default="./train_4_32.h5", type=str, help="path to load dataset")
 parser.add_argument("--number", default="1", type=int, help="path to load dataset")
 
 
@@ -62,7 +62,7 @@ def adjust_learning_rate(optimizer, epoch):
 
 
 def save_checkpoint(model, epoch):
-    model_folder = "train/ESPCN/"
+    model_folder = "train/"
     model_out_path = model_folder + "{}.pth".format(epoch)
     state = {"epoch": epoch, "model": model}
     if not os.path.exists(model_folder):

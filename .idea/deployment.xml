@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="ecnu">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/KFM/Research/RPMNet" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="kangfu@10.26.1.7:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/kangfu/Codes/RPMNet" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

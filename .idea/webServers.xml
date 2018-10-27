@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7e4b44a6-c1ca-4f19-b14e-196eb954b478" name="ecnu" url="http://47.105.121.5">
+        <fileTransfer host="47.105.121.5" port="7022" rootFolder="/home/scw4750" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="7022" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

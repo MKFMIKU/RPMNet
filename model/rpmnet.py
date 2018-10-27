@@ -64,8 +64,41 @@ class DDBlock(nn.Module):
         return output, up
 
 
+class ResidualBlock(nn.Module):
+    def __init__(self, channels, use_se=False):
+        super(ResidualBlock, self).__init__()
+        self.use_se = use_se
+        self.rate = 4
+        self.plane = 1
+        if self.use_se:
+            self.se = SELayer(channels)
+        self.conv1 = nn.Conv2d(channels, channels, kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv2 = nn.Conv2d(channels, channels, kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv3 = nn.Conv2d(channels, channels, kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv4 = nn.Conv2d(channels, channels, kernel_size=3, stride=1, padding=1, bias=False)
+
+        self.up_bottle = nn.Conv2d(channels, self.rate ** 2, kernel_size=3, stride=1, padding=1, bias=False)
+
+        self.pixel_shuffle = nn.PixelShuffle(self.rate)
+
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.orthogonal_(m.weight)
+
+    def forward(self, x, lr):
+        output = F.relu(self.conv1(x))
+        output = self.conv2(output)
+        output = torch.add(lr, output)
+        output = F.relu(self.conv3(output))
+        output = self.conv4(output)
+        output = torch.add(lr, output)
+        up = self.up_bottle(output)
+        up = self.pixel_shuffle(up)
+        return output, up
+
+
 class Net(nn.Module):
-    def __init__(self, plane=1, channels=32, rese_blocks=16, use_se=True):
+    def __init__(self, plane=1, channels=32, rese_blocks=8, use_se=True):
         super(Net, self).__init__()
         self.use_se = use_se
         self.rese_blocks = rese_blocks
@@ -74,7 +107,7 @@ class Net(nn.Module):
 
         self.conv_F = nn.ModuleList()
         for i in range(self.rese_blocks):
-            self.conv_F.append(DDBlock(channels=channels, use_se=use_se))
+            self.conv_F.append(ResidualBlock(channels=channels, use_se=use_se))
 
         self.up_bottle = nn.Conv2d(rese_blocks, plane, kernel_size=3, stride=1, padding=1, bias=False)
 
